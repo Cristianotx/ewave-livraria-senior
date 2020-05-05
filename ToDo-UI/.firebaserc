@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "todo-270701": {
+      "hosting": {
+        "ToDo-UI": [
+          "todo-270701"
+        ]
+      }
+    }
+  }
+}

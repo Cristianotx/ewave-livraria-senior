@@ -1,0 +1,19 @@
+{
+  "hosting": [
+    {
+      "target": "ToDo-UI",
+      "public": "dist/ToDo-UI",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    }
+  ]
+}
