@@ -1,0 +1,35 @@
+<div class="wrapper-paginacao">
+  <div class="page-info pull-left">
+    <div
+      id="div-page-txt"
+      class="form-group pull-left"
+      [class.has-error]="exibirAlertaDePaginaInvalida"
+      [class.has-feedback]="exibirAlertaDePaginaInvalida"
+      [hidden]="!mostrarTxtPaginacao"
+    >
+      <input
+        type="number"
+        class="form-control input-single"
+        (keyup.enter)="onTxtPaginaEnterPressed()"
+        (keyup.esc)="onTxtPaginaEscPressed()"
+        (keyup)="onTxtPaginaKeyUp()"
+        (keydown)="somenteNumeroKeydown($event)"
+        (change)="onTxtPaginaChanged()"
+        (blur)="onTxtPaginaBlur()"
+        [(ngModel)]="paginaModel"
+        min="1"
+      />
+    </div>
+
+    <div *ngIf="!mostrarTxtPaginacao" (click)="mostrarTxtPagina($event)">Pag. {{ paginaAtual }}</div>
+  </div>
+
+  <div class="btn-group" role="group">
+    <button type="button" class="btn btn-secondary btn-no-text" aria-label="Voltar" (click)="voltarPagina()">
+      <i class="fa fa-caret-left"></i>
+    </button>
+    <button type="button" class="btn btn-secondary btn-no-text" aria-label="Avançar" (click)="avancarPagina()">
+      <i class="fa fa-caret-right"></i>
+    </button>
+  </div>
+</div>

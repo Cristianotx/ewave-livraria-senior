@@ -1,0 +1,90 @@
+<div
+  class="modal fade modal-timeline"
+  bsModal
+  #modal="bs-modal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="dialog-static-name"
+  [config]="{ backdrop: 'static' }"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="dialog-events-name" class="modal-title pull-left">{{ isEdicao ? 'Alterar' : 'Realizar' }} Empréstimo</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="fecharModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="needs-validation" [formGroup]="form" [ngClass]="{ 'was-validated': submitted }" novalidate>
+          <div class="form-row">
+            <div class="col-md-6">
+              <label for="livro">Livros</label>
+              <select class="custom-select" id="livro" formControlName="livroId" required>
+                <option selected disabled value="">Selecione um livro</option>
+                <ng-container *ngIf="livros$ | async as livros">
+                  <option *ngFor="let livro of livros" [ngValue]="livro.id">{{ livro.titulo }}</option>
+                </ng-container>
+              </select>
+              <div class="invalid-feedback">
+                Livro é obrigatóriio
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label for="usuario">Usuários</label>
+              <select class="custom-select" id="usuario" formControlName="usuarioId" required>
+                <option selected disabled value="">Selecione um usuário</option>
+                <ng-container *ngIf="usuarios$ | async as usuarios">
+                  <option *ngFor="let usuario of usuarios" [ngValue]="usuario.id">{{ usuario.nome }}</option>
+                </ng-container>
+              </select>
+              <div class="invalid-feedback">
+                Usuário é obrigatóriio
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col-md-6">
+              <app-datepicker
+                title="Data do empréstimo"
+                [form]="form"
+                controlName="dataEmprestimo"
+                idName="dataEmprestimo"
+                placeholder="Ex.: 01/01/2019"
+                ngDefaultControl
+              ></app-datepicker>
+              <div class="invalid-feedback">
+                Data do empréstimo é obrigatóriio
+              </div>
+            </div>
+            <div class="col-md-6">
+              <app-datepicker
+                title="Data da devolução"
+                [form]="form"
+                controlName="dataVencimento"
+                idName="dataVencimento"
+                placeholder="Ex.: 01/01/2019"
+                ngDefaultControl
+              ></app-datepicker>
+              <div class="invalid-feedback">
+                Data da devolução é obrigatóriio
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <div class="acoes">
+          <button type="button" class="btn btn-secondary" (click)="cancelar()">
+            <i class="zmdi zmdi-close"></i> Cancelar
+          </button>
+
+          <button type="button" (click)="submit()" class="btn btn-success" disableButtonDuringRequest>
+            <i class="fa fa-check"></i>
+            Salvar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

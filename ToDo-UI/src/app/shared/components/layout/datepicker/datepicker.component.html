@@ -1,0 +1,16 @@
+<label class="control-label">{{ title }}</label>
+<form class="form-inline" [formGroup]="form">
+  <input
+    [id]="idName"
+    class="form-control"
+    [placeholder]="placeholder"
+    [bsConfig]="bsConfig"
+    [minDate]="minDate"
+    [formControlName]="controlName"
+    [placement]="placement"
+    autocomplete="off"
+    bsDatepicker
+    #datePicker
+  />
+  <i class="fa fa-calendar icon-view" (click)="datePicker.click(); datePicker.focus()"></i>
+</form>

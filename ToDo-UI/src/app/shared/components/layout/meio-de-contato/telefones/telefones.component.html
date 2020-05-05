@@ -1,0 +1,118 @@
+<div class="telefones">
+  <div class="ui-datatable" *ngIf="telefones$ | async as telefones">
+    <div class="header-acoes">
+      <button type="button" class="btn btn-primary" (click)="abrirModal()">+</button>
+    </div>
+    <table>
+      <thead class="ui-datatable-thead">
+        <tr class="ui-state-default ng-star-inserted">
+          <th class="ui-state-default ui-unselectable-text ng-star-inserted" scope="col" style="width: 50px;">
+            <span class="ui-column-title ng-star-inserted">#</span>
+          </th>
+          <th class="ui-state-default ui-unselectable-text ng-star-inserted" scope="col" style="width: 50px;">
+            <span class="ui-column-title ng-star-inserted">Tipo</span>
+          </th>
+          <th class="ui-state-default ui-unselectable-text ng-star-inserted" scope="col">
+            <span class="ui-column-title ng-star-inserted">Número</span>
+          </th>
+          <th class="ui-state-default ui-unselectable-text ng-star-inserted" scope="col" style="width: 150px;">
+            <span class="ui-column-title ng-star-inserted">Ação</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody class="ui-datatable-data ui-widget-content ui-datatable-hoverable-rows">
+        <ng-container *ngIf="telefones && telefones.length > 0; else semTelefones">
+          <tr
+            class="ui-widget-content ui-datatable-emptymessage-row ng-star-inserted"
+            *ngFor="let telefone of telefones; let i = index"
+            style="visibility: visible;"
+          >
+            <td class="ui-datatable-emptymessage">
+              <span class="ng-star-inserted">{{ i + 1 }}</span>
+            </td>
+            <td class="ui-datatable-emptymessage">
+              <span class="ng-star-inserted">{{ telefone?.tipoId }}</span>
+            </td>
+            <td class="ui-datatable-emptymessage">
+              <span class="ng-star-inserted">{{ telefone?.numero }}</span>
+            </td>
+            <td class="ui-datatable-emptymessage acoes">
+              <button type="button" class="btn btn-warning" (click)="alterar(telefone)" tooltip="Alterar telefone">
+                <i class="fa fa-pencil-square-o"></i>
+              </button>
+              <button type="button" class="btn btn-danger" (click)="remover(telefone)" tooltip="excluir telefone">
+                <i class="fa fa-times"></i>
+              </button>
+            </td>
+          </tr>
+        </ng-container>
+
+        <ng-template #semTelefones>
+          <tr class="ui-widget-content ui-datatable-emptymessage-row ng-star-inserted" style="visibility: visible;">
+            <td class="ui-datatable-emptymessage" colspan="5">
+              <span class="ng-star-inserted">Nenhum registro encontrado</span>
+            </td>
+          </tr>
+        </ng-template>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div
+  class="modal fade modal-timeline"
+  bsModal
+  #modal="bs-modal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="dialog-static-name"
+  [config]="{ backdrop: 'static' }"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="dialog-events-name" class="modal-title pull-left">{{ isEdicao ? 'Alterar' : 'Salvar' }} E-mail</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="fecharModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="needs-validation" [formGroup]="form" [ngClass]="{ 'was-validated': submitted }" novalidate>
+          <div class="form-row">
+            <div class="col-md-6">
+              <label for="livro">Tipos de e-mail</label>
+              <select class="custom-select" id="livro" formControlName="tipoId" required>
+                <option selected disabled value="">Selecione um tipo</option>
+                <option selected [ngValue]="1">Celular</option>
+                <option selected [ngValue]="2">Residencial</option>
+                <option selected [ngValue]="3">Comercial</option>
+              </select>
+              <div class="invalid-feedback">
+                Livro é obrigatóriio
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label for="numero">Número</label>
+              <input type="text" class="form-control" id="numero" formControlName="numero" required />
+              <div class="invalid-feedback">
+                Número é obrigatório
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <div class="acoes">
+          <button type="button" class="btn btn-secondary" (click)="cancelar()">
+            <i class="zmdi zmdi-close"></i> Cancelar
+          </button>
+
+          <button type="button" (click)="submit()" class="btn btn-success" disableButtonDuringRequest>
+            <i class="fa fa-check"></i>
+            Salvar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

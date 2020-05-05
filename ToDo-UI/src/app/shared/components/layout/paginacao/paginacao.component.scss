@@ -1,0 +1,38 @@
+.wrapper-paginacao {
+  & {
+    float: left;
+    margin-left: 10px;
+    display: flex;
+  }
+  .page-info {
+    & {
+      cursor: pointer;
+      background: darken(#6c757d, 15%);
+      padding: 0px;
+      font-size: 12px;
+      color: #fff;
+      background: #6c757d;
+      align-items: center;
+      font-size: 13px !important;
+      width: 60px;
+      display: grid;
+      text-align: center;
+      border: none;
+    }
+    .form-group {
+      & {
+        margin-bottom: 0px !important;
+      }
+      .form-control {
+        width: 100%;
+        padding:6px !important;
+        text-align: center;
+      }
+    }
+  }
+  .btn-group {
+    .btn {
+      margin-left:0 !important;
+    }
+  }
+}

@@ -1,0 +1,77 @@
+<header>
+  <h3>Endereço</h3>
+</header>
+<ng-container [formGroup]="form">
+  <div class="form-row">
+    <div class="col-md-2">
+      <label for="cep">CEP</label>
+      <input type="text" class="form-control" id="cep" formControlName="cep" required />
+      <div class="invalid-feedback">
+        CEP é obrigatório
+      </div>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="col-md-3">
+      <label for="estado">Estado</label>
+      <select class="custom-select" id="estado" formControlName="estadoId" required>
+        <option selected disabled value="null">Selecione um estado</option>
+        <ng-container *ngIf="estados$ | async as estados">
+          <option *ngFor="let estado of estados" [ngValue]="estado.id">{{ estado.nome }}</option>
+        </ng-container>
+      </select>
+      <div class="invalid-feedback">
+        estado é obrigatóriio
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <label for="cidade">Cidade</label>
+      <select class="custom-select" id="cidade" formControlName="cidadeId" required>
+        <option selected disabled value="null">Selecione uma cidade</option>
+        <ng-container *ngIf="cidades$ | async as cidades">
+          <option *ngFor="let cidade of cidades" [ngValue]="cidade.id">{{ cidade.nome }}</option>
+        </ng-container>
+      </select>
+      <div class="invalid-feedback">
+        Cidade é obrigatóriio
+      </div>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="col-md-12">
+      <label for="logradouro">Logradouro</label>
+      <input type="text" class="form-control" id="logradouro" formControlName="logradouro" required />
+      <div class="invalid-feedback">
+        Logradouro é obrigatório
+      </div>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="col-md-2">
+      <label for="numero">Número</label>
+      <input type="number" class="form-control" id="numero" formControlName="numero" required />
+      <div class="invalid-feedback">
+        Número é obrigatório
+      </div>
+    </div>
+
+    <div class="col-md-10">
+      <label for="bairro">Bairro</label>
+      <input type="text" class="form-control" id="bairro" formControlName="bairro" required />
+      <div class="invalid-feedback">
+        Bairro é obrigatório
+      </div>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="col-md-12">
+      <label for="complemento">Complemento</label>
+      <input type="text" class="form-control" id="complemento" formControlName="complemento" required />
+      <div class="invalid-feedback">
+        Complemento é obrigatório
+      </div>
+    </div>
+  </div>
+</ng-container>
