@@ -1,0 +1,27 @@
+.sidebar {
+  & {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background-color: #3c4b64;
+  }
+  .sidebar-brand {
+    & {
+      display: flex;
+      height: 7vh;
+      justify-content: center;
+      align-items: center;
+      background: #fff;
+    }
+    .logo {
+      & {
+        display: flex;
+        width: 40%;
+        background: #fff;
+      }
+      img {
+        max-width: 100%;
+      }
+    }
+  }
+}

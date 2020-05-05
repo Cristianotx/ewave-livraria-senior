@@ -1,0 +1,26 @@
+.sidebar-nav-link {
+  & {
+    text-decoration: none;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    padding: 0.8445rem 1rem;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.25s, color 0.25s;
+  }
+
+  &:hover {
+    color: #fff;
+    background: #4638c2;
+  }
+}
+
+.sidebar-nav-icon {
+  flex: 0 0 56px;
+  height: 1.09375rem;
+  font-size: 1.09375rem;
+  text-align: center;
+  transition: 0.25s;
+  fill: currentColor;
+}

@@ -1,0 +1,15 @@
+<ng-container *ngIf="menus$ | async as menus">
+  <li
+    class="sidebar-nav-item"
+    *ngFor="let menu of menus"
+    [ngClass]="{ selecionado: menu.selecionado }"
+    (click)="itemSelecionado(menu)"
+  >
+    <a class="sidebar-nav-link">
+      <div class="sidebar-nav-icon">
+        {{ menu.icone }}
+      </div>
+      {{ menu.titulo }}
+    </a>
+  </li>
+</ng-container>
