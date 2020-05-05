@@ -1,0 +1,69 @@
+<div class="ui-datatable" *ngIf="data$ | async as emprestimos">
+  <div class="header-acoes">
+    <button class="btn btn-primary" (click)="abrirModal()">Novo empréstimo</button>
+  </div>
+  <table>
+    <thead class="ui-datatable-thead">
+      <tr class="ui-state-default ng-star-inserted">
+        <th class="ui-state-default ui-unselectable-text ng-star-inserted" scope="col" style="width: 50px;">
+          <span class="ui-column-title ng-star-inserted">#</span>
+        </th>
+        <th class="ui-state-default ui-unselectable-text ng-star-inserted" scope="col">
+          <span class="ui-column-title ng-star-inserted">Livro</span>
+        </th>
+        <th class="ui-state-default ui-unselectable-text ng-star-inserted" scope="col">
+          <span class="ui-column-title ng-star-inserted">Usuário</span>
+        </th>
+        <th class="ui-state-default ui-unselectable-text ng-star-inserted" scope="col">
+          <span class="ui-column-title ng-star-inserted">Data do Empréstimo</span>
+        </th>
+        <th class="ui-state-default ui-unselectable-text ng-star-inserted" scope="col">
+          <span class="ui-column-title ng-star-inserted">Data da devolução</span>
+        </th>
+        <th class="ui-state-default ui-unselectable-text ng-star-inserted" scope="col" style="width: 150px;">
+          <span class="ui-column-title ng-star-inserted">Ação</span>
+        </th>
+      </tr>
+    </thead>
+    <tbody class="ui-datatable-data ui-widget-content ui-datatable-hoverable-rows">
+      <ng-container *ngIf="emprestimos && emprestimos.length > 0; else semEmprestimos">
+        <tr
+          class="ui-widget-content ui-datatable-emptymessage-row ng-star-inserted"
+          *ngFor="let emprestimo of emprestimos; let i = index"
+          style="visibility: visible;"
+        >
+          <td class="ui-datatable-emptymessage">
+            <span class="ng-star-inserted">{{ i + 1 }}</span>
+          </td>
+          <td class="ui-datatable-emptymessage">
+            <span class="ng-star-inserted">{{ emprestimo?.livroTitulo }}</span>
+          </td>
+          <td class="ui-datatable-emptymessage">
+            <span class="ng-star-inserted">{{ emprestimo?.pessoaNome }}</span>
+          </td>
+          <td class="ui-datatable-emptymessage">
+            <span class="ng-star-inserted">{{ emprestimo?.dataEmprestimo | date: 'dd/MM/yyyy' }}</span>
+          </td>
+          <td class="ui-datatable-emptymessage">
+            <span class="ng-star-inserted">{{ emprestimo?.dataVencimento | date: 'dd/MM/yyyy' }}</span>
+          </td>
+          <td class="ui-datatable-emptymessage acoes">
+            <button class="btn btn-warning" (click)="selecionar(emprestimo)" tooltip="Alterar Empréstimo">
+              <i class="fa fa-pencil-square-o"></i>
+            </button>
+          </td>
+        </tr>
+      </ng-container>
+
+      <ng-template #semEmprestimos>
+        <tr class="ui-widget-content ui-datatable-emptymessage-row ng-star-inserted" style="visibility: visible;">
+          <td class="ui-datatable-emptymessage" colspan="5">
+            <span class="ng-star-inserted">Nenhum registro encontrado</span>
+          </td>
+        </tr>
+      </ng-template>
+    </tbody>
+  </table>
+</div>
+
+<app-emprestimo-cadastro></app-emprestimo-cadastro>

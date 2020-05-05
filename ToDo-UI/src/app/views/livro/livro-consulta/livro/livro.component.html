@@ -1,0 +1,23 @@
+<div class="livro" [ngClass]="{ ativo: livro.ativo, inativo: !livro.ativo }">
+  <div class="thumb" *ngIf="livro">
+    <img [src]="livro.capa" [alt]="livro.titulo" />
+  </div>
+  <div class="content">
+    <div class="status" [ngClass]="{ disponivel: livro.disponivel, emprestado: !livro.disponivel }">
+      {{ livro.disponivel ? 'Disponível' : 'Emprestado' }}
+    </div>
+    <div class="titulo">
+      {{ livro.titulo }}
+    </div>
+  </div>
+
+  <div class="acoes">
+    <button class="btn-acao" (click)="alterar(livro)">Alterar</button>
+    <button class="btn-acao" (click)="emprestar(livro)" [disabled]="!livro.disponivel">emprestimo</button>
+    <button class="btn-acao" (click)="reservar(livro)" [disabled]="!livro.disponivel">Reservar</button>
+    <button class="btn-acao" (click)="alterarSituacao(livro)">Desativar</button>
+  </div>
+  <div class="situacao">
+    {{ livro.ativo ? 'Ativo' : 'Desativado' }}
+  </div>
+</div>

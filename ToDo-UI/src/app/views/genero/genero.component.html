@@ -1,0 +1,111 @@
+<div class="ui-datatable" *ngIf="data$ | async as generos">
+  <div class="header-acoes">
+    <button class="btn btn-primary" (click)="abrirModal()">Novo gênero</button>
+  </div>
+  <table>
+    <thead class="ui-datatable-thead">
+      <tr class="ui-state-default ng-star-inserted">
+        <th class="ui-state-default ui-unselectable-text ng-star-inserted" scope="col" style="width: 50px;">
+          <span class="ui-column-title ng-star-inserted">#</span>
+        </th>
+        <th class="ui-state-default ui-unselectable-text ng-star-inserted" scope="col">
+          <span class="ui-column-title ng-star-inserted">Nome</span>
+        </th>
+        <th class="ui-state-default ui-unselectable-text ng-star-inserted" scope="col">
+          <span class="ui-column-title ng-star-inserted">Situação</span>
+        </th>
+        <th class="ui-state-default ui-unselectable-text ng-star-inserted" scope="col" style="width: 150px;">
+          <span class="ui-column-title ng-star-inserted">Ação</span>
+        </th>
+      </tr>
+    </thead>
+    <tbody class="ui-datatable-data ui-widget-content ui-datatable-hoverable-rows">
+      <ng-container *ngIf="generos && generos.length > 0; else semGeneros">
+        <tr
+          class="ui-widget-content ui-datatable-emptymessage-row ng-star-inserted"
+          *ngFor="let genero of generos; let i = index"
+          style="visibility: visible;"
+        >
+          <td class="ui-datatable-emptymessage">
+            <span class="ng-star-inserted">{{ i + 1 }}</span>
+          </td>
+          <td class="ui-datatable-emptymessage">
+            <span class="ng-star-inserted">{{ genero?.nome }}</span>
+          </td>
+          <td class="ui-datatable-emptymessage">
+            <span class="ng-star-inserted" [ngClass]="{ ativo: genero?.ativo, inativo: !genero?.ativo }">{{
+              genero?.ativo ? 'Ativo' : 'Inativo'
+            }}</span>
+          </td>
+          <td class="ui-datatable-emptymessage acoes">
+            <button class="btn btn-warning" (click)="abrirModal(genero)" tooltip="Alterar Gênero">
+              <i class="fa fa-pencil-square-o"></i>
+            </button>
+            <button
+              class="btn"
+              [ngClass]="{ 'btn-danger': genero?.ativo, 'btn-success': !genero?.ativo }"
+              (click)="alterarSituacao(genero)"
+              tooltip="Alterar situação do Gênero"
+            >
+              <i class="fa" [ngClass]="{ 'fa-times': genero?.ativo, 'fa-check': !genero?.ativo }"></i>
+            </button>
+          </td>
+        </tr>
+      </ng-container>
+
+      <ng-template #semGeneros>
+        <tr class="ui-widget-content ui-datatable-emptymessage-row ng-star-inserted" style="visibility: visible;">
+          <td class="ui-datatable-emptymessage" colspan="5">
+            <span class="ng-star-inserted">Nenhum registro encontrado</span>
+          </td>
+        </tr>
+      </ng-template>
+    </tbody>
+  </table>
+</div>
+
+<div
+  class="modal fade modal-timeline"
+  bsModal
+  #modal="bs-modal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="dialog-static-name"
+  [config]="{ backdrop: 'static' }"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="dialog-events-name" class="modal-title pull-left">{{ editar ? 'Alterar' : 'Adicionar' }} Gênero</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="fecharModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="needs-validation" [formGroup]="form" [ngClass]="{ 'was-validated': submitted }" novalidate>
+          <div class="form-row">
+            <div class="col-md-12">
+              <label for="nome">Nome</label>
+              <input type="text" class="form-control" id="nome" formControlName="nome" required />
+              <div class="invalid-feedback">
+                Nome é obrigatório
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <div class="acoes">
+          <button type="button" class="btn btn-secondary" (click)="fecharModal()">
+            <i class="zmdi zmdi-close"></i> Cancelar
+          </button>
+
+          <button type="button" (click)="submit()" class="btn btn-success" disableButtonDuringRequest>
+            <i class="fa fa-check"></i>
+            Salvar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,54 @@
+<div class="fade-in">
+  <form
+    class="needs-validation"
+    [formGroup]="form"
+    (ngSubmit)="submit()"
+    [ngClass]="{ 'was-validated': submitted }"
+    novalidate
+  >
+    <div class="formulario">
+      <div class="form-row">
+        <div class="col-md-4">
+          <label for="titulo">Nome</label>
+          <input type="text" class="form-control" id="nome" formControlName="nome" required />
+          <div class="invalid-feedback">
+            Nome é obrigatório
+          </div>
+        </div>
+        <div class="col-md-4">
+          <label for="titulo">Cpf</label>
+          <input type="text" class="form-control" id="cpf" formControlName="cpf" required />
+          <div class="invalid-feedback">
+            Cpf é obrigatório
+          </div>
+        </div>
+        <div class="col-md-4">
+          <label for="instituicao">Instituição de Ensino</label>
+          <select class="custom-select" id="instituicao" formControlName="instituicaoDeEnsinoId" required>
+            <option selected disabled value="">Selecione uma instituição</option>
+            <ng-container *ngIf="instituicoes$ | async as instituicoes">
+              <option *ngFor="let instituicao of instituicoes" [ngValue]="instituicao.id">{{ instituicao.nome }}</option>
+            </ng-container>
+          </select>
+          <div class="invalid-feedback">
+            estado é obrigatóriio
+          </div>
+        </div>
+      </div>
+
+      <app-endereco [form]="form.get('endereco')"> </app-endereco>
+      <app-meio-de-contato></app-meio-de-contato>
+      
+    </div>
+    <div class="acoes">
+      <button type="button" class="btn btn-default" (click)="cancelar()">
+        <i class="zmdi zmdi-close"></i> Cancelar
+      </button>
+
+      <button type="submit" class="btn btn-success" disableButtonDuringRequest>
+        <i class="fa fa-check"></i>
+        Salvar
+      </button>
+    </div>
+  </form>
+</div>

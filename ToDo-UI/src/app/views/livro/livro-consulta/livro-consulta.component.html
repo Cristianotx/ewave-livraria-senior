@@ -1,0 +1,14 @@
+<div class="livros">
+  <div class="header-acoes">
+    <button type="button" class="btn btn-primary" (click)="cadastar()">Novo livro</button>
+  </div>
+  <ng-container *ngIf="data$ | async as livros">
+    <div class="grid-livros" *ngIf="livros && livros.length > 0; else semLivros">
+      <app-livro *ngFor="let livro of livros" [livro]="livro"></app-livro>
+    </div>
+    <ng-template #semLivros>
+      Nenhum livro cadastrado
+    </ng-template>
+  </ng-container>
+</div>
+<app-emprestimo-cadastro></app-emprestimo-cadastro>

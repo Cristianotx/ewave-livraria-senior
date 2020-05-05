@@ -1,0 +1,101 @@
+<div class="fade-in">
+  <form
+    class="needs-validation"
+    [formGroup]="form"
+    (ngSubmit)="submit()"
+    [ngClass]="{ 'was-validated': submitted }"
+    novalidate
+  >
+    <div class="formulario">
+      <div class="capa" [ngStyle]="{ 'background-image': 'url(' + form?.get('capa')?.value + ')' }" >
+        <div class="sem-capa" *ngIf="!form?.get('capa')?.value;">
+         <span> Sem capa informada</span>
+        </div>
+        <div class="alterar-foto">
+          <label for="file">
+            <i class="fa fa-pencil" aria-hidden="true"></i>
+          </label>
+          <input #arquivoInput type="file" id="file" (change)="obterArquivoFormData($event)" accept="image/*" />
+        </div>
+      </div>
+      <div class="conteudo">
+        <div class="form-row">
+          <div class="col-md-12">
+            <label for="titulo">Título</label>
+            <input type="text" class="form-control" id="titulo" formControlName="titulo" required />
+            <div class="invalid-feedback">
+              Título é obrigatório
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-md-5">
+            <label for="autor">Autor</label>
+            <select class="custom-select" id="autor" formControlName="autorId" required>
+              <option selected disabled value="">Selecione um autor</option>
+              <ng-container *ngIf="autores$ | async as autores">
+                <option *ngFor="let autor of autores" [ngValue]="autor.id">{{autor.nome}}</option>
+              </ng-container>
+            </select>
+            <div class="invalid-feedback">
+              Autor é obrigatóriio
+            </div>
+          </div>
+          <div class="col-md-5">
+            <label for="genero">Gênero</label>
+            <select class="custom-select" id="genero" formControlName="generoId" required>
+              <option selected disabled value="">Selecione um gênero</option>
+              <ng-container *ngIf="generos$ | async as generos">
+                <option *ngFor="let genero of generos" [ngValue]="genero.id">{{genero.nome}}</option>
+              </ng-container>
+            </select>
+            <div class="invalid-feedback">
+              Gênero é obrigatóriio
+            </div>
+          </div>
+          <div class="col-md-2">
+            <label for="paginas">Páginas</label>
+            <input type="number" class="form-control" id="paginas" formControlName="paginas" required />
+            <div class="invalid-feedback">
+              Quantidade de páginas é obrigatório
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-md-12">
+            <label for="capa">Capa</label>
+            <input type="text" class="form-control" id="capa" formControlName="capa" required />
+            <div class="invalid-feedback">
+              Capa é obrigatóro
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-md-12">
+            <label for="validationCustom02">Sinopse</label>
+            <textarea
+              type="text"
+              id="sinopse"
+              class="md-textarea form-control"
+              formControlName="sinopse"
+              required
+            ></textarea>
+            <div class="invalid-feedback">
+              Sinopse é obrigatório
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="acoes">
+      <button type="button" class="btn btn-default" (click)="cancelar()">
+        <i class="zmdi zmdi-close"></i> Cancelar
+      </button>
+
+      <button type="submit" class="btn btn-success" disableButtonDuringRequest>
+        <i class="fa fa-check"></i>
+        Salvar
+      </button>
+    </div>
+  </form>
+</div>

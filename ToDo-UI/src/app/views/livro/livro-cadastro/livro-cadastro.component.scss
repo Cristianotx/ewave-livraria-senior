@@ -1,0 +1,83 @@
+form {
+  & {
+    max-width: 70vw;
+    margin: auto;
+  }
+
+  .formulario {
+    & {
+      display: grid !important;
+      grid-template-columns: 30vh 110vh !important;
+      column-gap: 30px;
+      grid-template-areas: 'capa conteudo';
+      margin-bottom: 70px;
+    }
+
+    .capa {
+      & {
+        grid-area: capa;
+        margin-right: 15px;
+        background-repeat: no-repeat;
+        background-size: contain;
+        position: relative;
+        box-shadow: 0 0 4px 0 #84848461;
+      }
+      .sem-capa {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 15%;
+        right: 0;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-items: center;
+        text-align: center;
+        font-size: 18px;
+        font-weight: bold;
+      }
+
+      &:hover .alterar-foto {
+        opacity: 0.7;
+      }
+      .alterar-foto {
+        & {
+          position: absolute;
+          top: 0;
+          left: 0;
+          bottom: 0;
+          right: 0;
+          background-color: #000000;
+          opacity: 0;
+          -webkit-transition: all 0.5s linear;
+          -moz-transition: all 0.5s linear;
+          -ms-transition: all 0.5s linear;
+          -o-transition: all 0.5s linear;
+          transition: all 0.5s linear;
+          display: flex;
+          align-items: center;
+          flex-direction: column;
+          justify-content: center;
+        }
+        .fa {
+          margin: 0 auto;
+          font-size: 22px;
+          color: #fff;
+          cursor: pointer;
+        }
+      }
+    }
+    .conteudo {
+      grid-area: conteudo;
+    }
+  }
+
+  .acoes {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+input[type='file'] {
+  opacity: 0;
+}

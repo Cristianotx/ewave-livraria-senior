@@ -1,0 +1,41 @@
+<div class="fade-in">
+  <form
+    class="needs-validation"
+    [formGroup]="form"
+    (ngSubmit)="submit()"
+    [ngClass]="{ 'was-validated': submitted }"
+    novalidate
+  >
+    <div class="formulario">
+      <div class="form-row">
+        <div class="col-md-8">
+          <label for="titulo">Nome</label>
+          <input type="text" class="form-control" id="nome" formControlName="nome" required />
+          <div class="invalid-feedback">
+            Nome é obrigatório
+          </div>
+        </div>
+        <div class="col-md-4">
+          <label for="titulo">Cnpj</label>
+          <input type="text" class="form-control" id="cnpj" formControlName="cnpj" required />
+          <div class="invalid-feedback">
+            Cnpj é obrigatório
+          </div>
+        </div>
+      </div>
+
+      <app-endereco [form]="form.get('endereco')"> </app-endereco>
+      <app-meio-de-contato></app-meio-de-contato>
+    </div>
+    <div class="acoes">
+      <button type="button" class="btn btn-default" (click)="cancelar()">
+        <i class="zmdi zmdi-close"></i> Cancelar
+      </button>
+
+      <button type="submit" class="btn btn-success" disableButtonDuringRequest>
+        <i class="fa fa-check"></i>
+        Salvar
+      </button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,71 @@
+<div class="ui-datatable" *ngIf="data$ | async as usuarios">
+  <div class="header-acoes">
+    <button class="btn btn-primary" (click)="cadastar()">Novo Usuário</button>
+  </div>
+  <table>
+    <thead class="ui-datatable-thead">
+      <tr class="ui-state-default ng-star-inserted">
+        <th class="ui-state-default ui-unselectable-text ng-star-inserted" scope="col" style="width: 50px;">
+          <span class="ui-column-title ng-star-inserted">#</span>
+        </th>
+        <th class="ui-state-default ui-unselectable-text ng-star-inserted" scope="col">
+          <span class="ui-column-title ng-star-inserted">Nome</span>
+        </th>
+        <th class="ui-state-default ui-unselectable-text ng-star-inserted" scope="col">
+          <span class="ui-column-title ng-star-inserted">Cpf</span>
+        </th>
+        <th class="ui-state-default ui-unselectable-text ng-star-inserted" scope="col">
+          <span class="ui-column-title ng-star-inserted">Situação</span>
+        </th>
+        <th class="ui-state-default ui-unselectable-text ng-star-inserted" scope="col" style="width: 150px;">
+          <span class="ui-column-title ng-star-inserted">Ação</span>
+        </th>
+      </tr>
+    </thead>
+    <tbody class="ui-datatable-data ui-widget-content ui-datatable-hoverable-rows">
+      <ng-container *ngIf="usuarios && usuarios.length > 0; else semUsuarios">
+        <tr
+          class="ui-widget-content ui-datatable-emptymessage-row ng-star-inserted"
+          *ngFor="let usuario of usuarios; let i = index"
+          style="visibility: visible;"
+        >
+          <td class="ui-datatable-emptymessage">
+            <span class="ng-star-inserted">{{ i + 1 }}</span>
+          </td>
+          <td class="ui-datatable-emptymessage">
+            <span class="ng-star-inserted">{{ usuario?.nome }}</span>
+          </td>
+          <td class="ui-datatable-emptymessage">
+            <span class="ng-star-inserted">{{ usuario?.cpf }}</span>
+          </td>
+          <td class="ui-datatable-emptymessage">
+            <span class="ng-star-inserted" [ngClass]="{ ativo: usuario?.ativo, inativo: !usuario?.ativo }">{{
+              usuario?.ativo ? 'Ativo' : 'Inativo'
+            }}</span>
+          </td>
+          <td class="ui-datatable-emptymessage acoes">
+            <button class="btn btn-warning" (click)="alterar(usuario)" tooltip="Alterar Insituição">
+              <i class="fa fa-pencil-square-o"></i>
+            </button>
+            <button
+              class="btn"
+              [ngClass]="{ 'btn-danger': usuario?.ativo, 'btn-success': !usuario?.ativo }"
+              (click)="alterarSituacao(usuario)"
+              tooltip="Alterar situação da Instituição"
+            >
+              <i class="fa" [ngClass]="{ 'fa-times': usuario?.ativo, 'fa-check': !usuario?.ativo }"></i>
+            </button>
+          </td>
+        </tr>
+      </ng-container>
+
+      <ng-template #semUsuarios>
+        <tr class="ui-widget-content ui-datatable-emptymessage-row ng-star-inserted" style="visibility: visible;">
+          <td class="ui-datatable-emptymessage" colspan="5">
+            <span class="ng-star-inserted">Nenhum registro encontrado</span>
+          </td>
+        </tr>
+      </ng-template>
+    </tbody>
+  </table>
+</div>
