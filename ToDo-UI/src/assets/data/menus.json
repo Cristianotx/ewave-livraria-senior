@@ -1,0 +1,44 @@
+[
+  {
+    "id": 2,
+    "titulo": "Livros",
+    "icone": "",
+    "selecionado": false,
+    "rota": "livros"
+  },
+  {
+    "id": 3,
+    "titulo": "Empréstimos",
+    "icone": "",
+    "selecionado": false,
+    "rota": "emprestimos"
+  },
+  {
+    "id": 5,
+    "titulo": "Usuários",
+    "icone": "",
+    "selecionado": false,
+    "rota": "usuarios"
+  },
+  {
+    "id": 6,
+    "titulo": "Instituições de Ensino",
+    "icone": "",
+    "selecionado": false,
+    "rota": "instituicoes-de-ensino"
+  },
+  {
+    "id": 7,
+    "titulo": "Autores",
+    "icone": "",
+    "selecionado": false,
+    "rota": "autores"
+  },
+  {
+    "id": 8,
+    "titulo": "Gêneros",
+    "icone": "",
+    "selecionado": false,
+    "rota": "generos"
+  }
+]
