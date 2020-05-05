@@ -1,0 +1,23 @@
+.ativo {
+  padding: 5px 15px;
+  border-radius: 5px;
+  background-color: rgba(0, 196, 162, 0.15);
+  color: #00c4a2;
+}
+
+.inativo {
+  background-color: rgba(233, 0, 90, 0.15);
+  padding: 5px 15px;
+  border-radius: 5px;
+  color: #e9005a;
+}
+
+.acoes {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.header-acoes {
+  display: flex;
+  justify-content: flex-end;
+}
